@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "bundle.js",
-      publicPath: '/',
+      publicPath: "/",
     },
     module: {
       rules: [
@@ -27,7 +27,17 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
+          use: [
+            {
+              loader: "style-loader",
+            },
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+              },
+            },
+          ],
         },
         {
           test: /\.(png|jpe?g|gif|svg)$/,

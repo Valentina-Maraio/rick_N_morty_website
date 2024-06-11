@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 
-const VistaPrinciapl = () => {
+const Details = () => {
   return (
     <>
       <Navbar />
-      <div>VistaPrinciapl</div>
+      <div>Details</div>
     </>
   );
 };
 
-export default VistaPrinciapl;
+export default Details;

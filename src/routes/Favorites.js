@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 
-const DetallePersonaje = () => {
+const Favorites = () => {
   return (
     <>
     <Navbar/>
-    <div>DetallePersonaje</div>
+    <div>Favorites</div>
     </>
   )
 }
 
-export default DetallePersonaje
+export default Favorites

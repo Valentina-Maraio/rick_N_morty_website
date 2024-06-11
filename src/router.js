@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from './App'
-import VistaPrinciapl from "./routes/VistaPrinciapl";
-import DetallePersonaje from "./routes/DetallePersonaje";
+import Details from "./routes/Details";
+import Favorites from "./routes/Favorites";
 
 export const router = createBrowserRouter([
     {
@@ -9,11 +9,11 @@ export const router = createBrowserRouter([
         element: <App/>
     },
     {
-        path: '/vista_principal',
-        element: <VistaPrinciapl/>
+        path: '/details',
+        element: <Details/>
     },
     {
-        path: '/detalle_personaje',
-        element: <DetallePersonaje/>
+        path: '/favorites',
+        element: <Favorites/>
     }
 ])
