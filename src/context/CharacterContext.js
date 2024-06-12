@@ -7,6 +7,8 @@ export const CharacterProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
@@ -54,7 +56,7 @@ export const CharacterProvider = ({ children }) => {
   }, []);
 
   return (
-    <CharacterContext.Provider value={{ characters, loading, error }}>
+    <CharacterContext.Provider value={{ characters, loading, error, searchTerm, setSearchTerm }}>
       {children}
     </CharacterContext.Provider>
   );
