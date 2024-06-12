@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Favs from "../assets/Fav_counter.png";
-import "../styles/card.css";
+import "../styles/esempio.css";
+import Favs from '../assets/Fav_counter.png'
 import { CharacterContext } from "../context/CharacterContext";
 
 const Card = () => {
@@ -13,23 +13,20 @@ const Card = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
   return (
     <>
-      <div className="wrapper">
-        <div className="grid_container">
+      {" "}
+      <div className="grid">
         {characters.map((character) => {
           const thumbnailUrl = `${character.thumbnail.path}.${character.thumbnail.extension}`;
 
           return (
-            <div className="card" key={character.id}>
-              <div className="card_image">
-                <img
-                  src={thumbnailUrl}
-                  alt="card character"
-                  className="card_image"
-                />
-              <div className="f_container">
+            <>
+              <div className="card" key={character.id}>
+                <div className="image-container">
+                  <img src={thumbnailUrl} alt="Character Card" />
+                  <div className="red-line"></div>
+                </div>
                 <div className="footer">
                   <div className="faves-container">
                     <div className="character_name">
@@ -40,12 +37,11 @@ const Card = () => {
                     </div>
                   </div>
                 </div>
+                {" "}
               </div>
-              </div>
-            </div>
+            </>
           );
-        })}
-        </div>
+        })}{" "}
       </div>
     </>
   );

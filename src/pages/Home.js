@@ -9,7 +9,7 @@ const Home = () => {
       <CharacterProvider>
         <Search />
         <h1>Counter</h1>
-        <Card />
+        <Card/>
       </CharacterProvider>
     </>
   );
