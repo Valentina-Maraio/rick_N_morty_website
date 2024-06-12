@@ -68,6 +68,13 @@ img {
   height: 10.84px;
 }
 
+.no-results {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff0000; /* or any color that fits your design */
+  font-size: 1.2em;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
   .grid {
@@ -138,6 +145,13 @@ img {
   .favs img {
     width: 12px;
     height: 10.84px;
+  }
+
+  .no-results {
+    text-align: center;
+    margin-top: 20px;
+    color: #ff0000; /* or any color that fits your design */
+    font-size: 1.2em;
   }
 }
 
@@ -211,5 +225,12 @@ img {
   .favs img {
     width: 12px;
     height: 10.84px;
+  }
+
+  .no-results {
+    text-align: center;
+    margin-top: 20px;
+    color: #ff0000; /* or any color that fits your design */
+    font-size: 1.2em;
   }
 }
