@@ -1,0 +1,32 @@
+.input_container {
+  position: relative;
+  display: inline-block;
+  width: 186px;
+  height: 27px;
+  top: 20px;
+  left: 20px;
+  padding: 0px 0px 8px 0px;
+  gap: 12px;
+  border: 0px 0px 1px 0px;
+  opacity: 0px;
+  
+}
+
+.input_image {
+  width: 300px; /* Adjust the width as needed */
+  height: auto; /* This will maintain the aspect ratio of the image */
+}
+
+.input_field {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 186px;
+  height: 27px;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  border: 0px 0px 8px 0px;
+  gap: 12px;
+}
