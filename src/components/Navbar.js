@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/global.css";
+import "../styles/header.css";
 import Marvel_Logo from "../assets/Marvel.svg";
 import Favs from "../assets/Fav_counter.png";
 
@@ -13,8 +13,6 @@ const Navbar = () => {
             <img
               src={Marvel_Logo}
               alt="Marvel Logo"
-              width="122.22"
-              height="44"
             />
           </Link>
         </div>
