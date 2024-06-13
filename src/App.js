@@ -1,11 +1,14 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import { CharacterProvider } from "./context/CharacterContext";
 
 function App() {
   return (
     <>
-    <Navbar/>
-    <Home/>
+      <CharacterProvider>
+        <Navbar />
+        <Home />
+      </CharacterProvider>
     </>
   );
 }
