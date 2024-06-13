@@ -1,0 +1,53 @@
+.character_resume {
+  width: 1, 512px;
+  height: 320px;
+  background-color: black;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+}
+
+.character_resume_content {
+  width: 960px;
+  height: 320px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center; /* Center the content inside this div */
+}
+
+.character_resume_content img {
+  width: 320px;
+  height: 320px;
+}
+
+.character_info {
+  width: 640px;
+  height: 320px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+.character_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+.character_details_name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px
+}
+
+.row2 {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.favs img {
+  width: 12px;
+  height: 10.84px;
+}

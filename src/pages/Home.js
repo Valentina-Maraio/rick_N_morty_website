@@ -1,15 +1,12 @@
 import React from "react";
 import Search from "../components/Search";
-import Card from "../components/Card";
-import { CharacterProvider } from "../context/CharacterContext";
+import CardList from "../components/CardList";
 
 const Home = () => {
   return (
     <>
-      <CharacterProvider>
         <Search />
-        <Card />
-      </CharacterProvider>
+        <CardList/>
     </>
   );
 };

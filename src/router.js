@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from './App'
-import Details from "./routes/Details";
-import Favorites from "./routes/Favorites";
+import Details from "./pages/Details";
+import Favorites from "./pages/Favorites";
 
 export const router = createBrowserRouter([
     {
@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
         element: <App/>
     },
     {
-        path: '/details',
+        path: '/details/:characterID',
         element: <Details/>
     },
     {
