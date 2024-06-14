@@ -9,6 +9,36 @@ export const CharacterProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [characterDetails, setCharacterDetails] = useState(null);
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+  const [addedCharacters, setAddedCharacters] = useState([]);
+
+  const addToFavorites = (character) => {
+    const updatedFavorites = [...favorites, character];
+    setFavorites(updatedFavorites);
+    setAddedCharacters(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
+  const removeFromFavorites = (characterId) => {
+    const updatedFavorites = favorites.filter((char) => char.id !== characterId);
+    setFavorites(updatedFavorites);
+    setAddedCharacters(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
+  const handleFavoriteClick = (character) => {
+    if (favorites.some((fav) => fav.id === character.id)) {
+      removeFromFavorites(character.id);
+    } else {
+      addToFavorites(character);
+    }
+  };
+  console.log("favorites updated?", favorites)
+
+  const favoritesCount = favorites.length;
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -61,6 +91,12 @@ export const CharacterProvider = ({ children }) => {
         setSearchTerm,
         characterDetails,
         fetchCharacterDetails,
+        favorites,
+        addToFavorites,
+        removeFromFavorites,
+        handleFavoriteClick,
+        favoritesCount,
+        addedCharacters
       }}
     >
       {children}

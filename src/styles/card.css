@@ -1,10 +1,8 @@
+/* card.css */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 16px;
-  width: 100%;
-  height: 769.91px;
-  padding: 0px 48px 0px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .card {
@@ -17,13 +15,12 @@
   width: 172.5px;
   height: 189.97px;
   position: relative;
-  border: 0px, 0px, 4px, 0px;
 }
 
 img {
   width: 100%;
   height: 100%;
-  object-fit: fit;
+  object-fit: cover;
 }
 
 .red-line {
@@ -41,18 +38,9 @@ img {
   color: white;
 }
 
-/*.footer:before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    right: 0px;
-    border-bottom: 12.86px solid #ffffff;
-    border-left: 12.86px solid black;
-  }*/
-
 .faves-container {
   margin-top: 20px;
-  padding: 0px 14px 0px 14px;
+  padding: 0px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,75 +59,48 @@ img {
 .no-results {
   text-align: center;
   margin-top: 20px;
-  color: #ff0000; /* or any color that fits your design */
+  color: #ff0000;
   font-size: 1.2em;
 }
 
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
   .grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
-    width: 393px;
-    height: 2865.69px;
-    padding: 0px 16px 0px 16px;
+    padding: 0px 16px;
   }
 
   .card {
     width: 172.5px;
     height: 245.97px;
-    position: relative;
   }
 
   .image-container {
     width: 172.5px;
     height: 189.97px;
-    position: relative;
-    border: 0px, 0px, 4px, 0px;
   }
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: fit;
   }
 
   .red-line {
     width: 172.5px;
     height: 5.38px;
-    background-color: red;
     margin-top: -4px;
   }
 
   .footer {
     width: 172.5px;
     height: 56px;
-    background-color: #000000;
     margin-top: -17px;
-    color: white;
   }
-
-  /*.footer:before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    right: 0px;
-    border-bottom: 12.86px solid #ffffff;
-    border-left: 12.86px solid black;
-  }*/
 
   .faves-container {
     margin-top: 20px;
-    padding: 0px 14px 0px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fave-container:hover {
-    background-color: red;
-    color: black;
+    padding: 0px 14px;
   }
 
   .favs img {
@@ -148,9 +109,7 @@ img {
   }
 
   .no-results {
-    text-align: center;
     margin-top: 20px;
-    color: #ff0000; /* or any color that fits your design */
     font-size: 1.2em;
   }
 }
@@ -158,68 +117,41 @@ img {
 /* Media Query for Tablets Ipads portrait mode */
 @media (min-width: 768px) and (max-width: 1024px) {
   .grid {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 16px;
-    width: auto;
-    height: 1, 555.83px;
-    padding: 0px 16px 0px 16px;
+    padding: 0px 16px;
   }
 
   .card {
     width: 172.5px;
     height: 245.97px;
-    position: relative;
   }
 
   .image-container {
     width: 172.5px;
     height: 189.97px;
-    position: relative;
-    border: 0px, 0px, 4px, 0px;
   }
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: fit;
   }
 
   .red-line {
     width: 172.5px;
     height: 5.38px;
-    background-color: red;
     margin-top: -4px;
   }
 
   .footer {
     width: 172.5px;
     height: 56px;
-    background-color: #000000;
     margin-top: -17px;
-    color: white;
   }
-
-  /*.footer:before {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    right: 0px;
-    border-bottom: 12.86px solid #ffffff;
-    border-left: 12.86px solid black;
-  }*/
 
   .faves-container {
     margin-top: 20px;
-    padding: 0px 14px 0px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fave-container:hover {
-    background-color: red;
-    color: black;
+    padding: 0px 14px;
   }
 
   .favs img {
@@ -228,9 +160,7 @@ img {
   }
 
   .no-results {
-    text-align: center;
     margin-top: 20px;
-    color: #ff0000; /* or any color that fits your design */
     font-size: 1.2em;
   }
 }

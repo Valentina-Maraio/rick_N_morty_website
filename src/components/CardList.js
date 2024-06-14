@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CharacterContext } from "../context/CharacterContext";
 import Card from "./Card";
+import '../styles/card.css'
 
 const CardList = () => {
   const { characters, loading, error, searchTerm } =
@@ -14,27 +15,30 @@ const CardList = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  // Ensure searchTerm is a string
   const searchTermString = searchTerm
     ? searchTerm.toString().toLowerCase()
     : "";
 
   const filteredCharacters = characters.filter((character) => {
-    // Ensure character.name is a string
     const characterNameString = character.name
       ? character.name.toString().toLowerCase()
       : "";
     return characterNameString.includes(searchTermString);
   });
+
   return (
     <>
-      <Card
-        name={filteredCharacters.name}
-        characterID={filteredCharacters.characterID}
-        loading={loading}
-        error={error}
-        searchTerm={searchTerm}
-      />
+      <div className="grid">
+        {filteredCharacters.length > 0 ? (
+          filteredCharacters.map((character) => (
+            <Card key={character.id} character={character} />
+          ))
+        ) : (
+          <div className="no-results">
+            <p>No characters found for "{searchTerm}"</p>
+          </div>
+        )}
+      </div>
     </>
   );
 };
