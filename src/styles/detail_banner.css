@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   color: white;
-  text-align: center; /* Center the content inside this div */
+  text-align: center;
 }
 
 .character_resume_content img {
@@ -47,7 +47,7 @@
   text-align: right;
 }
 
-.favs img {
-  width: 12px;
-  height: 10.84px;
+.favs_details img {
+  width: 24px;
+  height: 21.68px;
 }
