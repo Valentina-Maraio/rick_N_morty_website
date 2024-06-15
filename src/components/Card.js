@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "../styles/card.css";
 import notFav from "../assets/notFav.png";
 import Favs from "../assets/Fav_counter.png";
@@ -7,10 +7,6 @@ import { Link } from "react-router-dom";
 
 const Card = ({ character }) => {
   const { favorites, handleFavoriteClick } = useContext(CharacterContext);
-
-  console.log("This is the favorites from the context:  ", favorites);
-
-  console.log("favorites updated?", favorites);
 
   return (
     <>
