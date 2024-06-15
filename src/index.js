@@ -4,13 +4,16 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { CharacterProvider } from "./context/CharacterContext";
+import { ErrorBoundary } from "react-error-boundary";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CharacterProvider>
-      <RouterProvider router={router} />
-    </CharacterProvider>
+    <ErrorBoundary>
+      <CharacterProvider>
+        <RouterProvider router={router} />
+      </CharacterProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

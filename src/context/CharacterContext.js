@@ -36,7 +36,6 @@ export const CharacterProvider = ({ children }) => {
       addToFavorites(character);
     }
   };
-  console.log("favorites updated?", favorites)
 
   const favoritesCount = favorites.length;
 
