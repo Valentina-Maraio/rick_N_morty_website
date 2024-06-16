@@ -1,15 +1,20 @@
 .character_resume {
-  width: 1, 512px;
-  height: 320px;
+  width: 100%;
+  max-width: 1, 512px;
+  height: auto;
+  min-height: 320px;
   background-color: black;
   display: flex;
-  justify-content: center; /* Center horizontally */
+  justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .character_resume_content {
-  width: 960px;
-  height: 320px;
+  width: 100%;
+  mac-width: 960px;
+  height: auto;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -18,28 +23,26 @@
 }
 
 .character_resume_content img {
-  width: 320px;
-  height: 320px;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
 }
 
 .character_info {
-  width: 640px;
-  height: 320px;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
   color: white;
-  display: flex;
-  flex-direction: column;
-}
-.character_info {
   display: flex;
   flex-direction: column;
   margin-left: 100px;
 }
 
 .character_details_name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
 }
 
 .row2 {
@@ -50,4 +53,14 @@
 .favs_details img {
   width: 24px;
   height: 21.68px;
+}
+
+@media only screen and (max-width: 768px) {
+  .character_resume_content {
+    flex-direction: column;
+  }
+  .character_info {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }

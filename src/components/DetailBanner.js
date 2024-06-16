@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Favs from "../assets/Fav_counter.png";
 import "../styles/detail_banner.css";
-import "../styles/slider.css";
+//import "../styles/slider.css";
 
 const DetailBanner = () => {
   const location = useLocation();

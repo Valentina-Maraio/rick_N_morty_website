@@ -11,7 +11,6 @@ const Card = ({ character }) => {
   return (
     <>
       {" "}
-      <div className="grid">
         <div className="card" key={character.id}>
           <Link to={`/details/${character.characterID}`} state={{ character }}>
             <div className="image-container">
@@ -40,7 +39,6 @@ const Card = ({ character }) => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };
