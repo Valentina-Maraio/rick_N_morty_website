@@ -1,14 +1,20 @@
 .search_wrapper {
-  width: 1.512px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: 77px;
-  padding: 12px 48px 12px 48px;
-  gat: 12px;
+  padding: 12px 48px;
+  gap: 12px;
 }
 
-.input_field {
-  width: 1,416px;
+.input_container {
+  width: 1416px;
   height: 27px;
-  border: 0px, 0px, 1px, 0px;
-  padding: 0px 0px 8px 0px;
-  gap: 12px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline-color: transparent;
+}
+
+.result-text {
+    margin-top: -10px;
 }

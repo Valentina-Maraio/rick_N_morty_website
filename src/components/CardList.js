@@ -28,7 +28,7 @@ const CardList = () => {
 
   return (
     <>
-      <div className="grid">
+      <div className="container">
         {filteredCharacters.length > 0 ? (
           filteredCharacters.map((character) => (
             <Card key={character.id} character={character} />

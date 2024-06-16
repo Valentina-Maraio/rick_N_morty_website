@@ -8,19 +8,21 @@ const Search = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
   // Filtered characters based on searchTerm
   const filteredCharacters = useMemo(() => {
     if (!searchTerm.trim()) return characters;
-    
+
     const searchTermLower = searchTerm.toLowerCase().trim();
-    return characters.filter(char => 
+    return characters.filter((char) =>
       char.name.toLowerCase().includes(searchTermLower)
     );
   }, [searchTerm, characters]);
 
   // Calculate current character count based on filtered characters
   const currentCharacterCount = useMemo(() => {
-    return filteredCharacters.length;
+    const newFilter = filteredCharacters.length;
+    return newFilter;
   }, [filteredCharacters]);
 
   return (
@@ -28,13 +30,15 @@ const Search = () => {
       <div className="search_wrapper">
         <div className="input_container">
           <input
-            className="input_field"
+            className="input_container"
             placeholder="SEARCH A CHARACTER..."
             value={searchTerm}
             onChange={handleSearch}
           />
         </div>
-        <p>{currentCharacterCount} RESULTS</p>
+        <div className="result-text">
+          <h2>{currentCharacterCount} RESULTS</h2>
+        </div>
       </div>
     </>
   );

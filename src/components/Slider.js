@@ -9,7 +9,7 @@ const Slider = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="comic_container">
         <div className="comic">
           <h2>COMICS
           </h2>
