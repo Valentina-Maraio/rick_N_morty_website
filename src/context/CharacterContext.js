@@ -4,13 +4,17 @@ import React, { createContext, useState, useEffect } from "react";
 export const CharacterContext = createContext();
 
 export const CharacterProvider = ({ children }) => {
+  const api_key = process.env.REACT_APP_API_KEY;
+  const api_key_hash = process.env.REACT_APP_HASH;
+  const ts = process.env.REACT_APP_TS;
+
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [characterDetails, setCharacterDetails] = useState(null);
   const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem('favorites');
+    const savedFavorites = localStorage.getItem("favorites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
   const [addedCharacters, setAddedCharacters] = useState([]);
@@ -19,14 +23,16 @@ export const CharacterProvider = ({ children }) => {
     const updatedFavorites = [...favorites, character];
     setFavorites(updatedFavorites);
     setAddedCharacters(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   const removeFromFavorites = (characterId) => {
-    const updatedFavorites = favorites.filter((char) => char.id !== characterId);
+    const updatedFavorites = favorites.filter(
+      (char) => char.id !== characterId
+    );
     setFavorites(updatedFavorites);
     setAddedCharacters(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
   const handleFavoriteClick = (character) => {
@@ -44,7 +50,7 @@ export const CharacterProvider = ({ children }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://gateway.marvel.com/v1/public/characters?limit=50&ts=1&apikey=e8d433263a96a2011fb02a314bf9f618&hash=99375150951f8f7e28711e48dc3977be"
+          `https://gateway.marvel.com/v1/public/characters?limit=50&ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -61,11 +67,12 @@ export const CharacterProvider = ({ children }) => {
     fetchCharacters();
   }, []);
 
+
   const fetchCharacterDetails = async (characterId) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://gateway.marvel.com/v1/public/comics/${characterId}/characters?limit=50&ts=1&apikey=e8d433263a96a2011fb02a314bf9f618&hash=99375150951f8f7e28711e48dc3977be`
+        `https://gateway.marvel.com/v1/public/comics/${characterId}/characters?limit=50&ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -95,7 +102,7 @@ export const CharacterProvider = ({ children }) => {
         removeFromFavorites,
         handleFavoriteClick,
         favoritesCount,
-        addedCharacters
+        addedCharacters,
       }}
     >
       {children}
