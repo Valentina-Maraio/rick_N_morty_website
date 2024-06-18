@@ -8,6 +8,7 @@
   width: 960px;
   height: 526.8px;
   padding: 0px, 48px, 0px, 48px;
+  
 }
 
 .image_box {
@@ -56,4 +57,77 @@
 
 .comic_des {
   margin-top: -18px;
+}
+
+@media (min-width: 300px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 10px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
+}
+
+
+@media (min-width: 640px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 10px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
+}
+
+@media (min-width: 768px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 70px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 70px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 300px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .comic_container { 
+    padding-left: -200px;
+    display: flex;
+    position: relative;
+    margin-left: 850px;
+    width: 960px;
+    height: 526.8px;
+    padding: 0px, 48px, 0px, 48px;
+  }
 }

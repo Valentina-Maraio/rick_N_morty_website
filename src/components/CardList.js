@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { CharacterContext } from "../context/CharacterContext";
 import Card from "./Card";
-import '../styles/card.css'
 
 const CardList = () => {
   const { characters, loading, error, searchTerm } =

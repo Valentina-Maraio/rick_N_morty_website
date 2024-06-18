@@ -18,3 +18,31 @@
 .result-text {
     margin-top: -10px;
 }
+
+@media (min-width: 300px) {
+  .search_wrapper {
+    height: 77px;
+    padding: 12px 6px;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 640px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 1024px) {
+
+}
+
+@media (min-width: 1280px) {
+
+}
+
+@media (min-width: 1536px) {
+
+}
