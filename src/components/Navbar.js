@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <>
       <div className="header">
-        <div className="logo">
+        <div className="marvel_logo">
           <Link to="/">
             <img src={Marvel_Logo} alt="Marvel Logo" />
           </Link>

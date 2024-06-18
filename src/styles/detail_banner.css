@@ -1,66 +1,216 @@
-.character_resume {
-  width: 100%;
-  max-width: 1, 512px;
-  height: auto;
-  min-height: 320px;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
-.character_resume_content {
-  width: 100%;
-  mac-width: 960px;
-  height: auto;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-
-.character_resume_content img {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-}
-
-.character_info {
-  width: 100%;
-  max-width: 640px;
-  height: auto;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  margin-left: 100px;
-}
-
-.character_details_name {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.row2 {
-  margin-top: 10px;
-  text-align: right;
-}
-
 .favs_details img {
   width: 24px;
   height: 21.68px;
 }
 
-@media only screen and (max-width: 768px) {
-  .character_resume_content {
+.character {
+  width: 100%;
+  display: flex;
+  width: 100%;
+  min-height: 400px;
+  align-items: center;
+  justify-content: center;
+}
+
+.character_foto img{
+  display: flex;
+  width: 100%;
+  max-height: 420px;
+  align-items: center;
+  justify-content: center;
+  object-fit: fit;
+}
+
+.character_info {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.character_description {
+  margin-top: -1px;
+  display: flex;
+  background-color: black;
+  color: white;
+}
+
+p {
+  padding: 0 16px;
+}
+
+.responsive_comics {
+  display: flex;
+  width: 100%;
+  min-width: 400px;
+  min-height: 500px;
+  align-content: center;
+  justify-content: center;
+}
+
+.image_box {
+  display: inline-block;
+  min-height: 200px;
+  padding: 10px;
+}
+
+.comics {
+  height: 84px;
+  min-width: 1015px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: black;
+}
+
+@media (min-width: 300px) {
+  .character{
+    background-color: black;
     flex-direction: column;
+    align-items: center;
+  }
+  .comics {
+    height: 84px;
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+  .slider_box {
+    margin-left: 30px;
   }
   .character_info {
-    margin-left: 0;
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: green;
+  }
+}
+
+@media (min-width: 640px) {
+  .character{
+    background-color: black;
+    flex-direction: column;
+    align-items: center;
+  }
+  .character_info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .responsive_info{
+    display: block;
+    text-align: end;
+  }
+  .comics {
+    height: 84px;
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .character{
+    background-color: black;
+    flex-direction: row;
+    align-items: center;
+  }
+  .character_info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .responsive_info{
+    display: block;
+    margin-right: 100px;
+    text-align: end;
+  }
+  .character_foto {
+    margin-left: 80px;
+    
+  }
+  .comics {
+    height: 84px;
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .character{
+    background-color: black;
+    flex-direction: row;
+    align-items: center;
+  }
+  .comics {
+    height: 84px;
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 1280px) {
+  .character{
+    background-color: black;
+    flex-direction: row;
+    align-items: center;
+  }
+  .character_info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+  }
+  .responsive_info{
+    display: block;
+    margin-right: 200px;
+    text-align: end;
+  }
+  .character_foto {
+    margin-left: 200px;
+  }
+  .comics {
+    height: 84px;
+    min-width: 1015px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1536px) {
+  .character{
+    background-color: black;
+    flex-direction: row;
+    align-items: center;
+  }
+  .character_info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .responsive_info{
+    display: block;
+    margin-right: 300px;
+    text-align: end;
+  }
+  .character_foto {
+    margin-left: 300px;
   }
 }
