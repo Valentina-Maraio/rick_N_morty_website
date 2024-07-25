@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "bundle.js",
+      filename: isProduction ? "[name].[contenthash].js" : "bundle.js",
       publicPath: "/",
     },
     module: {
@@ -24,15 +24,12 @@ module.exports = (env, argv) => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: "babel-loader",
-          options: {
-            jsonLimit: "20mb", // Increase the limit to 20MB
-          },
         },
         {
           test: /\.css$/,
           use: [
             {
-              loader: "style-loader",
+              loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: "css-loader",
@@ -71,7 +68,7 @@ module.exports = (env, argv) => {
         inject: "body",
       }),
       new MiniCssExtractPlugin({
-        filename: "[name].[contenthash].css",
+        filename: isProduction ? "[name].[contenthash].css" : "[name].css",
       }),
       new DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(argv.mode),
@@ -82,20 +79,23 @@ module.exports = (env, argv) => {
       isProduction &&
         new CompressionWebpackPlugin({
           algorithm: "gzip",
+          test: /\.(js|css|html)$/,
+          threshold: 10240,
+          minRatio: 0.8,
         }),
       isProduction &&
         new BundleAnalyzerPlugin({
           analyzerMode: "static",
           openAnalyzer: false,
         }),
-      new HotModuleReplacementPlugin(), // Add this plugin
-    ].filter(Boolean), // Filter out false values
+      new HotModuleReplacementPlugin(),
+    ].filter(Boolean),
     devServer: {
       static: {
         directory: path.join(__dirname, "dist"),
       },
       compress: true,
-      hot: true, // Enable hot module replacement
+      hot: true,
       port: 9000,
       open: true,
     },
