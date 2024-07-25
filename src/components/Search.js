@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
-import "../styles/search_bar.css";
 import { CharacterContext } from "../context/CharacterContext";
+import "../styles/search_bar.css";
 
 const Search = () => {
   const { searchTerm, setSearchTerm, characters } = useContext(CharacterContext);

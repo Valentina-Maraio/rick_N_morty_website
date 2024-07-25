@@ -1,7 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from './App'
-import Details from "./pages/Details";
-import Favorites from "./pages/Favorites";
+import React, { Suspense, lazy } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import App from './App';
+
+const Details = lazy(() => import('./pages/Details'));
+const Favorites = lazy(() => import('./pages/Favorites'));
+
+const Loading = () => <div>Loading...</div>;
 
 export const router = createBrowserRouter([
     {
@@ -10,10 +14,18 @@ export const router = createBrowserRouter([
     },
     {
         path: '/details/:characterID',
-        element: <Details/>
+        element: (
+            <Suspense fallback={<Loading />}>
+                <Details />
+            </Suspense>
+        ),
     },
     {
         path: '/favorites',
-        element: <Favorites/>
+        element: (
+            <Suspense fallback={<Loading />}>
+                <Favorites />
+            </Suspense>
+        ),
     }
-])
+]);
