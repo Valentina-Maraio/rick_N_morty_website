@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import api from "../api";
 
 export const CharacterContext = createContext();
@@ -17,27 +23,39 @@ export const CharacterProvider = ({ children }) => {
   const api_key_hash = process.env.REACT_APP_HASH;
   const ts = process.env.REACT_APP_TS;
 
-  const [characters, setCharacters] = useState(loadFromLocalStorage("characters") || []);
+  const [characters, setCharacters] = useState(
+    loadFromLocalStorage("characters") || []
+  );
   const [loading, setLoading] = useState(!localStorage.getItem("characters"));
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [characterDetails, setCharacterDetails] = useState(null);
-  const [characterComics, setCharacterComics] = useState([]); // State for comics
-  const [comicDetails, setComicDetails] = useState([]); // New state for comic details
-  const [favorites, setFavorites] = useState(loadFromLocalStorage("favorites") || []);
-  
+  const [characterComics, setCharacterComics] = useState(
+    loadFromLocalStorage("characterComics") || []
+  );
+  const [favorites, setFavorites] = useState(
+    loadFromLocalStorage("favorites") || []
+  );
 
-  const addToFavorites = useCallback((character) => {
-    const updatedFavorites = [...favorites, character];
-    setFavorites(updatedFavorites);
-    saveToLocalStorage("favorites", updatedFavorites);
-  }, [favorites]);
+  const addToFavorites = useCallback(
+    (character) => {
+      const updatedFavorites = [...favorites, character];
+      setFavorites(updatedFavorites);
+      saveToLocalStorage("favorites", updatedFavorites);
+    },
+    [favorites]
+  );
 
-  const removeFromFavorites = useCallback((characterId) => {
-    const updatedFavorites = favorites.filter((char) => char.id !== characterId);
-    setFavorites(updatedFavorites);
-    saveToLocalStorage("favorites", updatedFavorites);
-  }, [favorites]);
+  const removeFromFavorites = useCallback(
+    (characterId) => {
+      const updatedFavorites = favorites.filter(
+        (char) => char.id !== characterId
+      );
+      setFavorites(updatedFavorites);
+      saveToLocalStorage("favorites", updatedFavorites);
+    },
+    [favorites]
+  );
 
   const handleFavoriteClick = (character) => {
     if (favorites.some((fav) => fav.id === character.id)) {
@@ -95,7 +113,7 @@ export const CharacterProvider = ({ children }) => {
     }
   };
 
-  // Fetch character's comics
+  // New function to fetch character's comics
   const fetchCharacterComics = async (characterId) => {
     setLoading(true);
     try {
@@ -108,39 +126,13 @@ export const CharacterProvider = ({ children }) => {
       const data = await response.json();
       if (data.data && data.data.results.length > 0) {
         setCharacterComics(data.data.results); // Set the comics data
-        console.log("Fetched Comics: ", data.data.results);
+        saveToLocalStorage("characterComics", data.data.results); // Save the data in localStorage
       } else {
         setCharacterComics([]);
       }
     } catch (error) {
       console.error("Error fetching character comics:", error);
       setError("Failed to load character comics.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // New function to fetch comic details
-  const fetchComicDetails = async (comicResourceURI) => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${comicResourceURI}?ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch comic details.");
-      }
-      const data = await response.json();
-      console.log("API Response for Comic Details:", data); // Log the API response
-      if (data.data && data.data.results.length > 0) {
-        setComicDetails(data.data.results); // Set the comic details data
-        console.log("Fetched Comic Details: ", data.data.results);
-      } else {
-        setComicDetails([]);
-      }
-    } catch (error) {
-      console.error("Error fetching comic details:", error);
-      setError("Failed to load comic details.");
     } finally {
       setLoading(false);
     }
@@ -157,9 +149,7 @@ export const CharacterProvider = ({ children }) => {
         characterDetails,
         fetchCharacterDetails,
         characterComics, // Expose comics data
-        fetchCharacterComics, // Expose fetch function for comics
-        comicDetails, // Expose comic details data
-        fetchComicDetails, // Expose fetch function for comic details
+        fetchCharacterComics, // Expose fetch function
         favorites,
         addToFavorites,
         removeFromFavorites,
