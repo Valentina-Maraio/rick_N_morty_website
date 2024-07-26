@@ -1,9 +1,10 @@
-import React, { useContext, memo, useEffect } from 'react';
+import React, { useContext, memo } from 'react';
 import { CharacterContext } from '../context/CharacterContext';
 import Card from './Card';
 
 const CardList = memo(() => {
-  const { characters, loading, error, searchTerm } = useContext(CharacterContext);
+  const { characters, loading, error, searchTerm, characterComics } = useContext(CharacterContext);
+  console.log(characterComics)
 
   if (loading) {
     return <div>Loading...</div>;
