@@ -26,13 +26,12 @@ export const CharacterProvider = ({ children }) => {
   const [characters, setCharacters] = useState(
     loadFromLocalStorage("characters") || []
   );
+  const [comics, setComics] = useState(loadFromLocalStorage("comics") || {});
   const [loading, setLoading] = useState(!localStorage.getItem("characters"));
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [characterDetails, setCharacterDetails] = useState(null);
-  const [characterComics, setCharacterComics] = useState(
-    loadFromLocalStorage("characterComics") || []
-  );
+  const [characterComics, setCharacterComics] = useState([]);
   const [favorites, setFavorites] = useState(
     loadFromLocalStorage("favorites") || []
   );
@@ -87,8 +86,35 @@ export const CharacterProvider = ({ children }) => {
       }
     };
 
-    fetchCharacters();
-  }, [characters.length, api_key, api_key_hash, ts]);
+    const fetchComics = async () => {
+      if (Object.keys(comics).length === 0) {
+        try {
+          const allComics = {};
+          // Initiate the comics fetch for all characters
+          await Promise.all(
+            characters.map(async (character) => {
+              const response = await api.get(
+                `https://gateway.marvel.com/v1/public/characters/${character.id}/comics?ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
+              );
+              const fetchedComics = response.data.data.results;
+              allComics[character.id] = fetchedComics;
+            })
+          );
+          setComics(allComics);
+          saveToLocalStorage("comics", allComics);
+        } catch (error) {
+          console.error("Error fetching comics:", error);
+          setError("Failed to fetch comics.");
+        }
+      }
+    };
+
+    // Fetch characters first
+    fetchCharacters().then(() => {
+      // Fetch comics in the background
+      setTimeout(fetchComics, 0);
+    });
+  }, [characters, api_key, api_key_hash, ts, comics]);
 
   const fetchCharacterDetails = async (characterId) => {
     setLoading(true);
@@ -102,6 +128,7 @@ export const CharacterProvider = ({ children }) => {
       const data = await response.json();
       if (data.data && data.data.results.length > 0) {
         setCharacterDetails(data.data.results[0]);
+        fetchCharacterComics(characterId);
       } else {
         setCharacterDetails(null);
       }
@@ -113,7 +140,6 @@ export const CharacterProvider = ({ children }) => {
     }
   };
 
-  // New function to fetch character's comics
   const fetchCharacterComics = async (characterId) => {
     setLoading(true);
     try {
@@ -125,8 +151,15 @@ export const CharacterProvider = ({ children }) => {
       }
       const data = await response.json();
       if (data.data && data.data.results.length > 0) {
-        setCharacterComics(data.data.results); // Set the comics data
-        saveToLocalStorage("characterComics", data.data.results); // Save the data in localStorage
+        setCharacterComics(data.data.results);
+        setComics((prevComics) => ({
+          ...prevComics,
+          [characterId]: data.data.results,
+        }));
+        saveToLocalStorage("comics", {
+          ...comics,
+          [characterId]: data.data.results,
+        });
       } else {
         setCharacterComics([]);
       }
@@ -136,6 +169,12 @@ export const CharacterProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCharacterSelect = async (characterId) => {
+    await fetchCharacterDetails(characterId);
+    // Fetch comics after details are fetched
+    fetchCharacterComics(characterId);
   };
 
   return (
@@ -148,13 +187,15 @@ export const CharacterProvider = ({ children }) => {
         setSearchTerm,
         characterDetails,
         fetchCharacterDetails,
-        characterComics, // Expose comics data
-        fetchCharacterComics, // Expose fetch function
+        characterComics,
+        fetchCharacterComics,
+        handleCharacterSelect,
         favorites,
         addToFavorites,
         removeFromFavorites,
         handleFavoriteClick,
         favoritesCount,
+        comics, // Provide comics data to context
       }}
     >
       {children}

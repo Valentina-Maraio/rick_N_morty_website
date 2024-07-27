@@ -4,8 +4,8 @@ import Card from './Card';
 
 const CardList = memo(() => {
   const { characters, loading, error, searchTerm, characterComics } = useContext(CharacterContext);
-  console.log(characterComics)
-
+  console.log("comics:", characterComics)
+  console.log("characters:" , characters)
   if (loading) {
     return <div>Loading...</div>;
   }

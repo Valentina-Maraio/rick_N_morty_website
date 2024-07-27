@@ -11,7 +11,7 @@ const Slider = () => {
   useEffect(() => {
     fetchCharacterComics(character.id);
   }, [character.id, fetchCharacterComics]);
-
+  
   return (
     <>
       <div className="comic_container">
