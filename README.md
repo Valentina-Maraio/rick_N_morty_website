@@ -72,12 +72,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Marvel Characters App
 ## Introducción/Resumen
-### Esta prueba consiste en la creación de una pequeña aplicación para obtener información sobre diferentes personajes de Marvel.
+### Esta prueba consiste en la creación de una pequeña aplicación para obtener información sobre diferentes personajes de Rick And Morty.
 
 
 Marvel Characters App
 Introducción/Resumen
-Esta prueba consiste en la creación de una pequeña aplicación para obtener información sobre diferentes personajes de Marvel.
+Esta prueba consiste en la creación de una pequeña aplicación para obtener información sobre diferentes personajes de Rick And Morty.
 
 ## Contenido
 1. Características de la Aplicación
@@ -120,8 +120,8 @@ Esta prueba consiste en la creación de una pequeña aplicación para obtener in
 ## Documentación y Utilidades
 ## API-REST
 
-- URL de las peticiones: [Marvel API Gateway](http://gateway.marvel.com/v1/)
-- Documentación de la API: [Documentación Marvel API](https://chatgpt.com/c/4022a1b1-6f5e-4003-bf1b-abfc110ca622#)
+- URL de las peticiones: [Rick And Morty API Gateway](https://rickandmortyapi.com/)
+- Documentación de la API: [Documentación Rick And Morty API](https://rickandmortyapi.com/documentation)
 - Diseños e Iconos: [Enlace a recursos gráficos](https://chatgpt.com/c/4022a1b1-6f5e-4003-bf1b-abfc110ca622#)
 
 ## Descripción de las Vistas
@@ -130,7 +130,7 @@ Esta prueba consiste en la creación de una pequeña aplicación para obtener in
 
 - Interfaz: Sigue el diseño propuesto en Figma.
 - Funcionalidad:
-  - Mostrar los primeros 50 personajes.
+  - Mostrar los primeros 20 personajes.
   - Barra de búsqueda para filtrar personajes por nombre.
   - Contador de resultados actualizados en tiempo real.
   - Listado de resultados con imagen, nombre y opción de añadir a favoritos.
@@ -143,7 +143,7 @@ Esta prueba consiste en la creación de una pequeña aplicación para obtener in
 - Funcionalidad:
   - Mostrar imagen, título y descripción del personaje.
   - Opción de añadir el personaje a favoritos.
-  - Listado de cómics ordenados por fecha de salida (primeros 20 cómics).
+  - Listado de episodios ordenados (primeros 20 cómics).
 
 ## Stack Tecnológico
 - React: >= 17
