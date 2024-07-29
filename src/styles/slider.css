@@ -1,133 +1,103 @@
 .comic_container {
   display: flex;
   justify-content: center;
-  display: flex;
   align-items: center;
   position: relative;
-  margin-left: 300px;
   width: 960px;
   height: 526.8px;
-  padding: 0px, 48px, 0px, 48px;
-  
-}
-
-.image_box {
-  width: 179.2px;
-  height: 340.8px;
-  display: inline-block;
-  cursor: pointer;
-  margin-right: 16px;
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 0 48px;
 }
 
 #slider_content {
   display: flex;
   overflow-x: scroll;
   white-space: nowrap;
-  scrollbar-gutter: smooth;
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: red #f0f0f0;
-  position: relative;
   margin-top: 20px;
-}
-#slider_content::-webkit-scrollbar {
-  width: 10px; /* width of the scrollbar */
-}
-
-#slider_content::-webkit-scrollbar-track {
-  background: #f0f0f0; /* color of the track */
-}
-
-#slider_content::-webkit-scrollbar-thumb {
-  background-color: #999999; /* color of the thumb */
-  border-radius: 5px; /* roundness of the thumb */
 }
 
 .comic {
-  width: 960px;
+  width: 960px; /* or 100% if you want it to be responsive */
   height: 38px;
   color: black;
   position: absolute;
   top: 0;
   margin-top: 20px;
-  justify-items: center;
-  align-items: center;
   display: flex;
+  justify-content: flex-start; /* Aligns items to the left */
+  align-items: center;
+}
+
+.episode-title {
+  margin: 0; /* Remove default margins */
+  padding-left: 16px; /* Optional: Add some padding for spacing */
 }
 
 .comic_des {
   margin-top: -18px;
 }
 
+.slider_image_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.episode-image {
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.episode_box {
+  text-align: center;
+}
+
+/* Media Queries */
 @media (min-width: 300px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 10px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-
 @media (min-width: 640px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 10px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 768px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 70px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 1024px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 70px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 1280px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 300px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 1536px) {
-  .comic_container { 
-    padding-left: -200px;
-    display: flex;
-    position: relative;
-    margin-left: 850px;
-    width: 960px;
-    height: 526.8px;
-    padding: 0px, 48px, 0px, 48px;
+  .comic_container {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

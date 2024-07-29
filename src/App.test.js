@@ -1,39 +1,24 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
-import { CharacterProvider } from './context/CharacterContext';
-import '@testing-library/jest-dom/extend-expect'; 
+import MockCharacterProvider from './MockCharacterProvider'; // Import the mock provider
+import '@testing-library/jest-dom';
 
-test('handles asynchronous updates correctly', async () => {
-  // Mock the fetch response
-  fetch.mockResponseOnce(JSON.stringify({
-    data: {
-      results: [
-        {
-          id: 1,
-          name: 'some async data',
-          thumbnail: {
-            path: 'path/to/image',
-            extension: 'jpg'
-          }
-        }
-      ]
-    }
-  }));
-  
-
+test('renders characters from context', async () => {
   render(
     <MemoryRouter>
-      <CharacterProvider>
+      <MockCharacterProvider>
         <App />
-      </CharacterProvider>
+      </MockCharacterProvider>
     </MemoryRouter>
   );
 
-  // Wait for the async update to complete
-  const dataElement = await screen.findByText(/some async data/i);
+  // Check for initial loading state (if applicable)
+  // expect(screen.getByText(/loading/i)).toBeInTheDocument(); // Uncomment if your component shows a loading state
 
-  // Assert that the data element is in the document
-  expect(dataElement).toBeInTheDocument();
+  // Wait for the character to be rendered
+  await waitFor(() => {
+    expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
+  });
 });

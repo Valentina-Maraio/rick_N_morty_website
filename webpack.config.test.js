@@ -3,6 +3,8 @@ const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
 
 describe("Webpack Configuration", () => {
+  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
   test("entry point is correct", () => {
     const config = webpackConfig({}, { mode: "development" });
     expect(config.entry).toBe("./src/index.js");
@@ -38,15 +40,21 @@ describe("Webpack Configuration", () => {
     expect(babelRule.use).toBe("babel-loader");
   });
 
-  test("loads CSS files with style-loader and css-loader", () => {
+
+  test("loads CSS files with MiniCssExtractPlugin.loader and css-loader", () => {
     const config = webpackConfig({}, { mode: "development" });
     const cssRule = config.module.rules.find(
       (rule) => rule.test.toString() === /\.css$/.toString()
     );
     expect(cssRule).toBeTruthy();
-    const useLoaders = cssRule.use.map((loader) => loader.loader || loader);
-    expect(useLoaders).toContain("style-loader");
-    expect(useLoaders).toContain("css-loader");
+    const useLoaders = cssRule.use;
+    
+    // Check for MiniCssExtractPlugin.loader
+    expect(useLoaders[0].loader).toBe(MiniCssExtractPlugin.loader);
+    
+    // Check for css-loader
+    expect(useLoaders[1].loader).toBe("css-loader");
+    expect(useLoaders[1].options.modules).toBe(true);
   });
 
   test("loads image files with file-loader", () => {
@@ -58,4 +66,15 @@ describe("Webpack Configuration", () => {
     expect(imageRule).toBeTruthy();
     expect(imageRule.use[0].loader).toBe("file-loader");
   });
+
+  test("uses contenthash in production mode", () => {
+    const config = webpackConfig({}, { mode: "production" });
+    expect(config.output.filename).toBe("[name].[contenthash].js");
+    const miniCssExtractPlugin = config.plugins.find(
+      plugin => plugin instanceof MiniCssExtractPlugin
+    );
+    expect(miniCssExtractPlugin.options.filename).toBe("[name].[contenthash].css");
+  });
+  
+  
 });

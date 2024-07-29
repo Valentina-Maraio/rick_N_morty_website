@@ -5,7 +5,6 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import api from "../api";
 
 export const CharacterContext = createContext();
 
@@ -19,19 +18,15 @@ const loadFromLocalStorage = (key) => {
 };
 
 export const CharacterProvider = ({ children }) => {
-  const api_key = process.env.REACT_APP_API_KEY;
-  const api_key_hash = process.env.REACT_APP_HASH;
-  const ts = process.env.REACT_APP_TS;
 
   const [characters, setCharacters] = useState(
     loadFromLocalStorage("characters") || []
   );
-  const [comics, setComics] = useState(loadFromLocalStorage("comics") || {});
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(!localStorage.getItem("characters"));
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [characterDetails, setCharacterDetails] = useState(null);
-  const [characterComics, setCharacterComics] = useState([]);
   const [favorites, setFavorites] = useState(
     loadFromLocalStorage("favorites") || []
   );
@@ -66,136 +61,78 @@ export const CharacterProvider = ({ children }) => {
 
   const favoritesCount = useMemo(() => favorites.length, [favorites]);
 
+  const fetchCharacters = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("https://rickandmortyapi.com/api/character");
+      const data = await response.json();
+      const fetchedCharacters = data.results;
+      setCharacters(fetchedCharacters);
+      saveToLocalStorage("characters", fetchedCharacters);
+    } catch (error) {
+      console.error("Error fetching characters:", error);
+      setError("Failed to fetch characters.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const fetchEpisodes = useCallback(async (episodeUrls) => {
+    try {
+      const episodePromises = episodeUrls.map((url) =>
+        fetch(url).then((res) => res.json())
+      );
+      const episodesData = await Promise.all(episodePromises);
+      setEpisodes(episodesData);
+    } catch (error) {
+      console.error("Error fetching episodes:", error);
+      setError("Failed to fetch episodes.");
+    }
+  }, []);
+
+  const selectCharacter = useCallback(async (characterId) => {
+    setLoading(true);
+    try {
+      const character = characters.find(char => char.id === characterId);
+      if (character) {
+        setSelectedCharacter(character);
+        await fetchEpisodes(character.episode);
+      } else {
+        const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
+        const data = await response.json();
+        setSelectedCharacter(data);
+        await fetchEpisodes(data.episode);
+      }
+    } catch (error) {
+      console.error("Error selecting character:", error);
+      setError("Failed to select character.");
+    } finally {
+      setLoading(false);
+    }
+  }, [characters, fetchEpisodes]);
+
   useEffect(() => {
-    const fetchCharacters = async () => {
-      if (characters.length === 0) {
-        setLoading(true);
-        try {
-          const response = await api.get(
-            `https://gateway.marvel.com/v1/public/characters?limit=50&ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
-          );
-          const fetchedCharacters = response.data.data.results;
-          setCharacters(fetchedCharacters);
-          saveToLocalStorage("characters", fetchedCharacters);
-        } catch (error) {
-          console.error("Error fetching characters:", error);
-          setError("Failed to fetch characters.");
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    const fetchComics = async () => {
-      if (Object.keys(comics).length === 0) {
-        try {
-          const allComics = {};
-          // Initiate the comics fetch for all characters
-          await Promise.all(
-            characters.map(async (character) => {
-              const response = await api.get(
-                `https://gateway.marvel.com/v1/public/characters/${character.id}/comics?ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
-              );
-              const fetchedComics = response.data.data.results;
-              allComics[character.id] = fetchedComics;
-            })
-          );
-          setComics(allComics);
-          saveToLocalStorage("comics", allComics);
-        } catch (error) {
-          console.error("Error fetching comics:", error);
-          setError("Failed to fetch comics.");
-        }
-      }
-    };
-
-    // Fetch characters first
-    fetchCharacters().then(() => {
-      // Fetch comics in the background
-      setTimeout(fetchComics, 0);
-    });
-  }, [characters, api_key, api_key_hash, ts, comics]);
-
-  const fetchCharacterDetails = async (characterId) => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://gateway.marvel.com/v1/public/characters/${characterId}?ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch character details.");
-      }
-      const data = await response.json();
-      if (data.data && data.data.results.length > 0) {
-        setCharacterDetails(data.data.results[0]);
-        fetchCharacterComics(characterId);
-      } else {
-        setCharacterDetails(null);
-      }
-    } catch (error) {
-      console.error("Error fetching character details:", error);
-      setError("Failed to load character details.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchCharacterComics = async (characterId) => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=${ts}&apikey=${api_key}&hash=${api_key_hash}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch character comics.");
-      }
-      const data = await response.json();
-      if (data.data && data.data.results.length > 0) {
-        setCharacterComics(data.data.results);
-        setComics((prevComics) => ({
-          ...prevComics,
-          [characterId]: data.data.results,
-        }));
-        saveToLocalStorage("comics", {
-          ...comics,
-          [characterId]: data.data.results,
-        });
-      } else {
-        setCharacterComics([]);
-      }
-    } catch (error) {
-      console.error("Error fetching character comics:", error);
-      setError("Failed to load character comics.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCharacterSelect = async (characterId) => {
-    await fetchCharacterDetails(characterId);
-    // Fetch comics after details are fetched
-    fetchCharacterComics(characterId);
-  };
+    saveToLocalStorage("favorites", favorites);
+  }, [favorites]);
 
   return (
     <CharacterContext.Provider
       value={{
         characters,
+        selectedCharacter,
+        episodes,
         loading,
         error,
         searchTerm,
         setSearchTerm,
-        characterDetails,
-        fetchCharacterDetails,
-        characterComics,
-        fetchCharacterComics,
-        handleCharacterSelect,
+        fetchCharacters,
+        fetchEpisodes,
         favorites,
         addToFavorites,
         removeFromFavorites,
         handleFavoriteClick,
         favoritesCount,
-        comics, // Provide comics data to context
+        selectCharacter,
       }}
     >
       {children}
