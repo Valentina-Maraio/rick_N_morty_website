@@ -3,56 +3,48 @@ import "../styles/card.css";
 import notFav from "../assets/notFav.png";
 import Favs from "../assets/Fav_counter.png";
 import { CharacterContext } from "../context/CharacterContext";
-import { Link, useNavigate } from "react-router-dom";
-import LazyLoad from "react-lazyload";
+import { Link } from "react-router-dom";
 
 const Card = ({ character }) => {
-  const { favorites, handleFavoriteClick, handleCharacterSelect } =
-    useContext(CharacterContext);
-    const navigate = useNavigate();
+  const { favorites, handleFavoriteClick } = useContext(CharacterContext);
 
-
-  const handleCardClick = () => {
-    // Navigate to the details page
-    navigate(`/details/${character.id}`);
-    // Update character details and fetch comics
-    handleCharacterSelect(character.id);
+  const handleFavoriteIconClick = (e) => {
+    e.preventDefault(); // Prevent navigation
+    e.stopPropagation();
+    handleFavoriteClick(character);
   };
-
   return (
-    <div className="card" key={character.id} >
-      <Link to={`/details/${character.characterID}`} state={{ character }}>
-        <div className="image-container" onClick={handleCardClick}>
-          <LazyLoad height={200} offset={100}>
-            <img
-              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              alt="Character Card"
-            />
-          </LazyLoad>
-          <div className="red-line"></div>
-        </div>
-      </Link>
-      <div className="footer">
-        <div className="faves-container">
-          <div className="character_name">
-            <h5>{character.name}</h5>
+    <>
+      <div className="card">
+        <Link
+          to={`/details/${character.characterID}`}
+          state={{ character }}
+          className="card-link"
+          key={character.id}
+        >
+          <img
+            src={`${character.image}`}
+            alt={character.name}
+            className="card-image"
+          />
+          <div className="card-content">
+            <div className="character_name">
+              <h5>{character.name}</h5>
+            </div>
+            <div
+              className="favs"
+              onClick={handleFavoriteIconClick}
+            >
+              {favorites.some((fav) => fav.id === character.id) ? (
+                <img src={Favs} alt="Fav_Icon" />
+              ) : (
+                <img src={notFav} alt="Not_Fav_Icon" />
+              )}
+            </div>
           </div>
-          <div
-            className="favs"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleFavoriteClick(character);
-            }}
-          >
-            {favorites.some((fav) => fav.id === character.id) ? (
-              <img src={Favs} alt="Fav_Icon" />
-            ) : (
-              <img src={notFav} alt="Not_Fav_Icon" />
-            )}
-          </div>
-        </div>
+        </Link>
       </div>
-    </div>
+    </>
   );
 };
 

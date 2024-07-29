@@ -15,8 +15,8 @@ const DetailBanner = () => {
           <div className="character_foto">
             <img
             className="thumbnail"
-              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              alt={character.thumbnail.name}
+              src={`${character.image}`}
+              alt={character.name}
             />
           </div>
 
@@ -31,11 +31,9 @@ const DetailBanner = () => {
             </div>
 
             <div className="character_description">
-              {character.description ? (
-                <p>{character.description}</p>
-              ) : (
-                <p>This character does not have a description.</p>
-              )}
+              <p>Status: {character.status}</p>
+              <p>Species: {character.species}</p>
+              <p>Origin: {character.origin.name}</p>
             </div>
           </div>
         </div>

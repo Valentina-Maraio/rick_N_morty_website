@@ -1,134 +1,110 @@
-.container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 16px 16px;
-  grid-auto-flow: row;
-  padding: 16px;
-  margin: 16px;
-}
-
-.container * {
-  position: relative;
-}
-
-.container *:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
 .card {
-  width: 188.57px;
-  height: 245.97px;
+  background-color: black;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   position: relative;
-}
-
-.image-container {
-  width: 172.5px;
-  height: 189.97px;
-  position: relative;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.red-line {
-  width: 172.5px;
-  height: 5.38px;
-  background-color: red;
-  margin-top: -4px;
-}
-
-.footer {
-  width: 172.5px;
-  height: 56px;
-  background-color: #000000;
-  margin-top: -17px;
-  color: white;
-}
-
-.faves-container {
-  margin-top: 20px;
-  padding: 0px 14px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  color: white;
+  height: 240px;
 }
 
-.fave-container:hover {
-  background-color: red;
-  color: black;
+.card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
 }
 
-.favs img {
-  width: 12px;
-  height: 10.84px;
+.card-content {
+  padding: 0.5rem;
+  border-top: 3px solid #ff0000;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  justify-content: space-between; /* Added to space elements */
+  align-items: center; /* Added to vertically center the items */
 }
 
-.no-results {
-  text-align: center;
-  margin-top: 20px;
-  color: #ff0000;
-  font-size: 1.2em;
+.character_name {
+  flex-grow: 1; /* Allows the name to take up available space */
 }
 
-/* Media Queries for Responsiveness */
-
-@media (min-width: 300px) {
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0;
-    margin: 8px;
-    gap: 16px 8px;
-  }
+.favs {
+  cursor: pointer; /* Ensure the fav icon has a pointer cursor */
 }
 
-@media (min-width: 640px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .card {
-    width: 208.57px;
-    height: 265.97px;
-    position: relative;
-  }
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background-color: #ff0000;
+  transition: height 0.3s ease;
+  z-index: 0;
 }
 
-@media (min-width: 768px) {
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.card:hover::after {
+  height: calc(100% - 160px); /* Adjusted to match the new image height */
 }
 
-@media (min-width: 1024px) {
-  .container {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.card h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
-@media (min-width: 1280px) {
-  .container {
-    grid-template-columns: repeat(6, 1fr);
-  }
+.card p {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+  flex-grow: 1;
 }
 
-@media (min-width: 1536px) {
-  .container {
-    grid-template-columns: repeat(7, 1fr);
-  }
+.card-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+}
+
+.card-button:hover {
+  background-color: #0056b3;
+}
+
+.card:hover h2,
+.card:hover p {
+  color: #000;
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card a:hover {
+  text-decoration: none;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-link:hover {
+  text-decoration: none;
+  color: inherit;
 }

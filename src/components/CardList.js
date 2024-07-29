@@ -22,7 +22,7 @@ const CardList = memo(() => {
   });
 
   return (
-    <div className="container">
+    <>
       {filteredCharacters.length > 0 ? (
         filteredCharacters.map((character) => (
           <Card key={character.id} character={character} />
@@ -32,7 +32,7 @@ const CardList = memo(() => {
           <p>No characters found for "{searchTerm}"</p>
         </div>
       )}
-    </div>
+    </>
   );
 });
 
